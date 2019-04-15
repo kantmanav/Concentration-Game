@@ -23,7 +23,7 @@ public class Concentration extends Board
      * by populating it with tiles.
      */
     public Concentration() { 
-        gamerules = SEVENS;
+        gamerules = CONCENTRATION;
         String[] randomCards = new String[12];
         for (int num = 11; num >= 0; num--) {
             int psn = (int) ((num + 1) * Math.random());
