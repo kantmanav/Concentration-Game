@@ -14,11 +14,16 @@ public class Concentration extends Board
     // create the game board
     private Tile[][] gameboard = makeBoard();
     private String[] cards = getCards();
+    
+    private static final int CONCENTRATION = 100;
+    private static final int SEVENS = 200;
+    private int gamerules;
     /** 
      * The constructor for the game. Creates the 2-dim gameboard
      * by populating it with tiles.
      */
     public Concentration() { 
+        gamerules = SEVENS;
         String[] randomCards = new String[12];
         for (int num = 11; num >= 0; num--) {
             int psn = (int) ((num + 1) * Math.random());
@@ -72,15 +77,34 @@ public class Concentration extends Board
      * @return a message indicating whether or not a match occured
      */
     public String checkForMatch(int row1, int column1, int row2, int column2) {
-        if (gameboard[row1][column1].getFace() == gameboard[row2][column2].getFace()) {
-            gameboard[row1][column1].foundMatch();
-            gameboard[row2][column2].foundMatch();
-            return "It's a match!";
+        if (gamerules == CONCENTRATION) {
+            if (gameboard[row1][column1].getFace() == gameboard[row2][column2].getFace()) {
+                gameboard[row1][column1].foundMatch();
+                gameboard[row2][column2].foundMatch();
+                return "It's a match!";
+            }
+            else {
+                gameboard[row1][column1].faceUp(false);
+                gameboard[row2][column2].faceUp(false);
+                return "Not a match.";
+            }
+        }   
+        else if (gamerules == SEVENS) {
+            int a = Integer.parseInt(gameboard[row1][column1].getFace());
+            int b = Integer.parseInt(gameboard[row2][column2].getFace());
+            if (a + b == 7) {
+                gameboard[row1][column1].foundMatch();
+                gameboard[row2][column2].foundMatch();
+                return "Sevens!";
+            }
+            else {
+                gameboard[row1][column1].faceUp(false);
+                gameboard[row2][column2].faceUp(false);
+                return "Not a seven.";
+            } 
         }
         else {
-            gameboard[row1][column1].faceUp(false);
-            gameboard[row2][column2].faceUp(false);
-            return "Not a match.";
+            return "Nein.";
         }
     }
 

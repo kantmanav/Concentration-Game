@@ -89,5 +89,12 @@ public class Tile
     public boolean matched() {
         return matched;
     }
+    
+    public boolean sumSeven(Tile tile) {
+        int a = Integer.parseInt(this.cardFace);
+        int b = Integer.parseInt(tile.cardFace);
+        if ( a + b == 7) return true;
+        else return false;
+    }
 }
 
