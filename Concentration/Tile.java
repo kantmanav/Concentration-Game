@@ -89,6 +89,5 @@ public class Tile
     public boolean matched() {
         return matched;
     }
-
 }
 

@@ -40,10 +40,21 @@ public class Concentration extends Board
      * @return true if all pairs of cards have been matched, false otherwse
      */
     public boolean allTilesMatch() {
-        
-        // to do
-        
-        return true;
+        int numberMatched = 0;
+        for (int i = 0; i < gameboard.length; i++) {
+            for (int j = 0; j < gameboard[0].length; j++) {
+                if (gameboard[i][j].matched() == true) {
+                    numberMatched++;
+                }
+            }  
+        } 
+       
+        if (numberMatched == 12) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -61,10 +72,16 @@ public class Concentration extends Board
      * @return a message indicating whether or not a match occured
      */
     public String checkForMatch(int row1, int column1, int row2, int column2) {
-        
-        // to do
-        
-        return "";
+        if (gameboard[row1][column1].getFace() == gameboard[row2][column2].getFace()) {
+            gameboard[row1][column1].foundMatch();
+            gameboard[row2][column2].foundMatch();
+            return "It's a match!";
+        }
+        else {
+            gameboard[row1][column1].faceUp(false);
+            gameboard[row2][column2].faceUp(false);
+            return "Not a match.";
+        }
     }
 
     /**
@@ -78,8 +95,7 @@ public class Concentration extends Board
      * @param column the column value of Tile
      */
     public void showFaceUp (int row, int column) {
-        
-        // to do 
+        gameboard[row][column].faceUp(true);
     }
 
     /**
